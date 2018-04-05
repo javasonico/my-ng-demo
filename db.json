@@ -1,0 +1,134 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "usua": "demo",
+      "pass": "123",
+      "emai": "demo@gmail.com",
+      "nomb": "Juan",
+      "apel": "Pérez",
+      "idio": {
+        "id": 1,
+        "nomb": "Español"
+      },
+      "esta": {
+        "id": 1,
+        "nomb": "Activado"
+      },
+      "perf": [
+        {
+          "id": 1,
+          "nomb": "ROLE_ADMIN"
+        }
+      ],
+      "fech_crea": 1522901687987,
+      "usua_modi": "demo",
+      "fech_modi": 1522901736789
+    },
+    {
+      "usua": "master",
+      "nomb": "Test",
+      "apel": "Master",
+      "emai": "master@correo.com",
+      "esta": {
+        "id": 0,
+        "nomb": "Inactivo"
+      },
+      "idio": {
+        "id": 2,
+        "nomb": "Inglés"
+      },
+      "perf": [
+        {
+          "id": 1,
+          "nomb": "ROLE_ADMIN"
+        }
+      ],
+      "fech_crea": "2018-04-05T22:06:39.246Z",
+      "pass": "master",
+      "id": 2,
+      "fech_modi": "2018-04-05T22:15:00.016Z",
+      "usua_modi": "demo"
+    },
+    {
+      "usua": "test",
+      "nomb": "Test",
+      "apel": "Usuario",
+      "emai": "test@gmail.com",
+      "esta": {
+        "id": 1,
+        "nomb": "Activado"
+      },
+      "idio": {
+        "id": 2,
+        "nomb": "Inglés"
+      },
+      "perf": [
+        {
+          "id": 2,
+          "nomb": "ROLE_USER"
+        },
+        {
+          "id": 1,
+          "nomb": "ROLE_ADMIN"
+        }
+      ],
+      "fech_crea": "2018-04-05T22:19:44.099Z",
+      "pass": "test",
+      "id": 3
+    },
+    {
+      "usua": "user",
+      "nomb": "Test",
+      "apel": "Usuario",
+      "emai": "user@gmal.com",
+      "esta": {
+        "id": 1,
+        "nomb": "Activado"
+      },
+      "idio": {
+        "id": 2,
+        "nomb": "Inglés"
+      },
+      "perf": [
+        {
+          "id": 1,
+          "nomb": "ROLE_ADMIN"
+        }
+      ],
+      "fech_crea": "2018-04-05T22:40:35.129Z",
+      "pass": "user",
+      "id": 4
+    }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "nomb": "ROLE_ADMIN"
+    },
+    {
+      "id": 2,
+      "nomb": "ROLE_USER"
+    }
+  ],
+  "idiomas": [
+    {
+      "id": 1,
+      "nomb": "Español"
+    },
+    {
+      "id": 2,
+      "nomb": "Inglés"
+    }
+  ],
+  "estados": [
+    {
+      "id": 1,
+      "nomb": "Activado"
+    },
+    {
+      "id": 0,
+      "nomb": "Inactivo"
+    }
+  ]
+}

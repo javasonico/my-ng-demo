@@ -1,0 +1,102 @@
+<p-dataTable [value]="listUsua" (onRowSelect)="onRowSelect($event)" 
+selectionMode="single" [immutable]=false [pageLinks]="3" [responsive]="true" [stacked]="stacked">
+    <p-header>
+        <div class="ui-helper-clearfix" style="width:100%">
+          <p-message severity="info" text="Seleccione un dato de la tabla si desea modificarlo"></p-message>
+          <button type="button" pButton icon="fa-plus" style="float:right"
+          label="Nuevo" (click)="mostNuevUsua()"></button>
+        </div>
+    </p-header>
+    <p-column field="id" header="Id" [style]="{'width':'30px','text-align':'center'}"></p-column>
+    <p-column field="usua" header="Login" [style]="{'width':'80px','text-align':'center'}"></p-column>
+    <p-column field="emai" header="E-mail"></p-column>
+    <p-column header="Idioma" [style]="{'width':'80px','text-align':'center'}">
+      <ng-template let-data_idio="rowData" pTemplate="body">
+        <span class="badge badge-success">{{data_idio.idio.nomb }}</span>
+      </ng-template>
+    </p-column>
+    <p-column header="Perfiles" >
+      <ng-template let-data_perf="rowData" pTemplate="body">
+          <span class="badge badge-info" *ngFor="let temp of data_perf.perf"> 
+            {{ temp.nomb }} 
+          </span>
+      </ng-template>
+    </p-column>
+    <p-column header="Fecha Creación" >
+      <ng-template let-data_fech_crea="rowData" pTemplate="body">
+          {{ data_fech_crea.fech_crea | date:'dd/MM/yyyy HH:mm:ss' }}
+      </ng-template>
+    </p-column>
+    <p-column field="usua_modi" header="Modificado por"></p-column>
+    <p-column header="Fecha Modificación" >
+      <ng-template let-data_fech_modi="rowData" pTemplate="body">
+          {{ data_fech_modi.fech_modi | date:'dd/MM/yyyy HH:mm:ss' }}
+      </ng-template>
+    </p-column>
+  </p-dataTable>
+
+  <p-dialog header="Detalles de Usuario" [(visible)]="mostDial" [responsive]="true" 
+  showEffect="fade" [modal]="true" [contentStyle]="{'width':'500px', 'height':'550px'}">
+  <form #userForm="ngForm">
+      <div class="ui-grid ui-grid-responsive ui-fluid" *ngIf="objeUsua">
+          <div class="form-group ui-float-label">
+              <p-message severity="warn" text="* Son campos requeridos"></p-message>
+              <p-message severity="warn" text="Para efectos de prueba el password es el mismo Login"></p-message>
+          </div>
+          <span class="form-group ui-float-label" *ngIf="nuevUsua != true">
+              <input id="float-input" type="text" [(ngModel)]="objeUsua.id" 
+              name="id" pInputText [disabled]="nuevUsua != true"> 
+              <label for="float-input">ID</label>
+          </span>
+          <span class="form-group ui-float-label">
+              <input id="float-input" type="text" [(ngModel)]="objeUsua.usua" 
+              name="usua" pInputText pattern="^[a-z0-9_-]{4,15}$" required
+              [disabled]="nuevUsua != true"> 
+              <label for="float-input">Login *</label>
+          </span>
+          <span class="form-group ui-float-label">
+              <input id="float-input" type="text" [(ngModel)]="objeUsua.nomb"
+              name="nomb" pInputText> 
+              <label for="float-input">Nombre *</label>
+          </span>
+          <span class="form-group ui-float-label">
+              <input id="float-input" type="text" [(ngModel)]="objeUsua.apel"
+              name="apel" pInputText required> 
+              <label for="float-input">Apellido *</label>
+          </span>
+          <span class="form-group ui-float-label">
+              <input id="float-input" type="text" [(ngModel)]="objeUsua.emai"
+              name="email" pInputText
+              required
+              pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"> 
+              <label for="float-input">E-mail *</label>
+          </span>
+          <span class="form-group ui-float-label">
+              <span>Estado: *</span>
+              <p-dropdown [options]="listEsta" [(ngModel)]="objeUsua.esta"
+              name="esta" required
+              optionLabel="nomb" [style]="{'width':'250px'}" placeholder="Seleccione..."></p-dropdown>
+          </span>
+          <span class="form-group ui-float-label">
+              <span>Idioma: *</span>
+              <p-dropdown [options]="listIdio" [(ngModel)]="objeUsua.idio"
+              name="idio" required
+              optionLabel="nomb" [style]="{'width':'250px'}" placeholder="Seleccione..."></p-dropdown>
+          </span>
+          <span class="form-group ui-float-label">
+              <span>Perfiles: *</span>
+              <p-multiSelect [options]="listRole" [(ngModel)]="objeUsua.perf" 
+              name="perf" optionLabel="nomb" required></p-multiSelect>
+          </span>
+      </div>
+      <p-footer>
+          <div class="ui-dialog-buttonpane ui-helper-clearfix">
+              <button pButton icon="fa-close" (click)="saliGuarUsua()" label="Salir" class="ui-button-secondary"></button>
+              <button *ngIf="nuevUsua" [disabled]="!userForm.form.valid" type="button" pButton icon="fa-check" (click)="guarUsua()" label="Guardar"></button>
+              <button *ngIf="nuevUsua != true" type="button" (click)="confirm()" pButton icon="fa fa-trash" label="Eliminar" class="ui-button-danger"></button>
+              <button *ngIf="nuevUsua != true" [disabled]="!userForm.form.valid" pButton icon="fa fa-edit" styleClass="ui-button-primary" label="Modificar" (click)="editUsua()"></button>
+          </div>
+      </p-footer>
+    </form>
+  </p-dialog>
+  <p-confirmDialog header="Confirmación" icon="fa fa-question-circle" width="425"></p-confirmDialog>
